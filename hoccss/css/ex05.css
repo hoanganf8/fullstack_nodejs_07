@@ -1,0 +1,84 @@
+/*
+Lớp giả (State)
+Cú pháp: selector:pseudo-class {
+}
+
+1. hover, active, focus
+Lưu ý: 
+- focus chỉ áp dụng với form
+- hover, active áp dụng với tất cả thẻ html
+
+Ngoại lệ: Để 1 thẻ html không phải form có focus --> Thêm thuộc tính tabindex
+
+2. not --> Loại trừ, phủ định
+
+3. disabled
+
+4. checked
+*/
+/* .btn:hover {
+  background: green;
+}
+.btn:focus {
+  background: blue;
+}
+.btn:active {
+  background: blueviolet;
+} */
+
+input:focus::placeholder {
+  color: red;
+}
+input:active::placeholder {
+  font-style: italic;
+}
+h1:focus {
+  color: red;
+}
+
+.products .item:not(.active):not(.inactive) {
+  color: red;
+}
+
+.btn {
+  background: green;
+  border: 0;
+}
+/* .btn[disabled] {
+  color: #fff;
+} */
+/* .btn:disabled {
+  color: #fff;
+} */
+
+input[type="checkbox"]:checked ~ span {
+  text-decoration: line-through;
+  color: blue;
+}
+input[type="checkbox"]:checked:disabled ~ span {
+  color: gray;
+}
+
+/* .products h2:first-child {
+  color: red;
+}
+
+.products h2:last-child {
+  color: green;
+} */
+
+/* .products h2:first-of-type {
+  color: red;
+}
+
+.products h2:last-of-type {
+  color: green;
+} */
+
+/* .products h2:nth-child(2n + 2) {
+  color: blueviolet;
+} */
+
+.products h2:nth-of-type(2n + 2) {
+  color: blueviolet;
+}
