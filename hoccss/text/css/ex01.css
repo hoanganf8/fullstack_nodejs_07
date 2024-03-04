@@ -1,0 +1,45 @@
+/*
+Giá trị kế thừa: 
+- inital --> Kế thừa giá trị mặc định của trình duyệt
+- inherit --> Kế thừa từ thành phần cha
+
+Các đơn vị hay dùng
+1. Đơn vị tuyệt đối
+- px (pixel)
+- pt (point) = 1.3 x px
+2. Đơn vị tương đối
+- em: Tỷ lệ với thành phần cha
+- rem: Tỷ lệ với mặc định trình duyệt
+- %: Tỷ lệ với thành phần cha
+- vw (viewport width): Tỷ lệ với chiều rộng khung nhìn (viewport)
+- vh (viewport height): Tỷ lệ với chiều cao khung nhìn
+
+Thuộc tính color: Thay đổi màu văn bản
+Cú pháp: color: value
+- Tên màu tiếng anh
+- Mã màu hexa
+- Mã màu rgb
+- Mã màu hsl
+...
+
+Giá trị: transparent
+
+Lưu ý: color là thuộc tính kế thừa
+*/
+
+.content {
+  color: red;
+}
+
+.content .title {
+  color: rgb(159, 8, 98);
+  border: 1px solid currentColor;
+}
+
+.content .title:hover {
+  /* color: inherit; */
+  color: yellow;
+}
+/* .content .sub-title:hover {
+  color: initial;
+} */
