@@ -1,0 +1,52 @@
+/*
+float: Trôi thành phần html về bên trái hoặc bên phải thành phần cha của nó
+Cú pháp: float: none | left | right
+
+clear: Ngăn chặn element bị trôi do ảnh hưởng của float
+Cú pháp: clear: none | left | right | both
+
+Lưu ý: Thuộc tính clear chỉ hoạt động với thẻ block
+*/
+
+.box {
+  width: 300px;
+  border: 1px solid red;
+  margin: 30px auto;
+  /* overflow: auto; */
+}
+
+.box::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.box .item-1 {
+  width: 30%;
+  height: 50px;
+  background: rgba(0, 128, 0, 0.565);
+  color: #fff;
+  float: left;
+}
+
+.box .item-2 {
+  width: 30%;
+  height: 100px;
+  background: rgba(255, 0, 0, 0.682);
+  color: #fff;
+  float: left;
+}
+/* .box .item-2::after {
+  content: "";
+  display: block;
+  clear: both;
+} */
+.text {
+  background: black;
+  color: #fff;
+  clear: both;
+}
+.clear {
+  display: block;
+  clear: both;
+}

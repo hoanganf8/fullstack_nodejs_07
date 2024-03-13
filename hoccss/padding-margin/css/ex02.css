@@ -1,0 +1,41 @@
+/*
+Trường hợp 1: 
+- 2 giá trị dương --> Lấy giá trị lớn hơn
+- 2 giá trị âm --> Lấy giá trị nhỏ hơn
+--> Cùng dấu --> Lấy trị tuyệt đối giá trị lớn hơn
+
+- 1 giá trị âm, 1 giá trị dương --> Cộng 2 giá trị
+--> Trái dấu: Cộng lại
+
+Trường hợp: margin phần tử con, không tự động đẩy phần tử cha
+- border
+- display: inline-block | flex | inline-flex | grid
+- position: absolute | fixed
+- float: left | right
+*/
+/* h2 {
+  border: 1px solid red;
+  margin: 0;
+}
+
+.title-1 {
+  margin-bottom: 10px;
+}
+
+.title-2 {
+  margin-bottom: 20px;
+} */
+
+.box {
+  background: green;
+  color: #fff;
+  width: 300px;
+  /* padding: 0 30px; */
+  padding-inline: 30px;
+  padding-block: 40px;
+  margin-inline: auto;
+}
+
+/* .box h2 {
+  padding: 50px 0;
+} */

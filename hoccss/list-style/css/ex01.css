@@ -1,0 +1,37 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.box {
+  width: 300px;
+  border: 1px solid red;
+  margin: 30px auto;
+}
+
+.box ul {
+  /* list-style-position: inside;
+  list-style-type: upper-roman; */
+  list-style: inside upper-roman;
+}
+/*
+list-style-position: inside | outside
+list-style-type: Kiểu danh sách
+- none --> Không ở định dạng danh sách
+- disc --> Mặc định của ul
+- circle
+- square
+- decimal --> Sắp xếp dạng số
+- decimal-leading-zero
+- lower-alpha
+- upper-alpha
+- lower-roman
+- upper-roman
+
+list-style-image: Thay biểu tượng bằng ảnh --> Không khuyến khích sử dụng vì không tùy chỉnh được kích thước ảnh
+--> Nên thay thế bằng background kết hợp với ::before
+
+list-style: position type image
+
+Bài tập: Xây dựng menu: Chỉ dùng inline-block, ul li
+PS: Không được dùng flex, float
+*/

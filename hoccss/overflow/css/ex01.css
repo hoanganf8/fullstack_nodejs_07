@@ -1,0 +1,33 @@
+/*
+overflow:
+- visible --> Hiển thị nội dung bị tràn (Mặc định)
+- hidden --> Ẩn nội dung bị tràn
+- scroll --> Ẩn và hiển thị thanh cuộn (Lúc nào cũng hiển thị)
+- auto --> Ẩn và hiển thị thanh cuộn (Chỉ hiển thị thanh cuộn)
+
+overflow-x
+overflow-y
+*/
+.box {
+  width: 200px;
+  height: 200px;
+  border: 1px solid red;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.box::-webkit-scrollbar-track {
+  background: greenyellow;
+}
+
+.box::-webkit-scrollbar-thumb {
+  background: red;
+}
+
+.box p {
+  width: 400px;
+}
