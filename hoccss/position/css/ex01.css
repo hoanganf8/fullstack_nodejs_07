@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  height: 2000px;
+}
 .box {
   width: 300px;
   height: 300px;
@@ -27,12 +30,23 @@
   /* left: calc(100% - 100px - 10px * 2); */
   /* margin-top: 20px;
   margin-left: 20px; */
-  position: absolute;
+  /* position: absolute;
   width: auto;
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
+  bottom: 0; */
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+  /* margin-top: -10px;
+  margin-left: 20px; */
+}
+
+.item:nth-child(3) {
+  background: red;
+  position: relative;
 }
 
 .overlay {
