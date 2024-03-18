@@ -25,7 +25,7 @@ body {
   font-size: 0;
   border-radius: 5px;
 }
-.menu ul li {
+.menu > ul > li {
   display: inline-block;
 }
 .menu ul li a {
@@ -33,7 +33,17 @@ body {
   padding: 10px 20px;
   font-size: initial;
 }
-.menu ul li a:hover {
+.menu ul > li:hover > a {
   background: #1abc9c;
   border-radius: 5px;
+}
+.menu > ul ul {
+  display: none;
+  position: absolute;
+  background: burlywood;
+  min-width: 200px;
+}
+
+.menu > ul > li:hover ul {
+  display: block;
 }

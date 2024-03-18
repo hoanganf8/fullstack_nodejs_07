@@ -1,0 +1,57 @@
+/*
+Flex = Flexible Box Module
+- Kỹ thuật chia layout linh hoạt
+- Trục: Main và Cross
+- Thành phần: Flex Container và Flex Item
+
+1. Các thuộc tính trong nhóm flex container
+- display: flex --> Kích hoạt flex
+- flex-direction: Chọn hướng cho trục chính
++ row --> Mặc định
++ column
++ row-reverse
++ column-reverse
+- justify-content: Căn chỉnh các item theo hướng song song với trục chính
++ flex-start
++ flex-end
++ center
++ space-between
++ space-around
++ space-evenly
++ start --> Về tìm hiểu
++ end --> Về tìm hiểu
+- align-items: Căn chỉnh các item theo hướng vuông góc với trục chính
++ stretch
++ flex-start
++ center
++ flex-end
++ baseline
+
+Về nhà: 
+- align-content
+- flex-wrap
+- gap
+- row-gap
+- column-gap
+*/
+
+.box {
+  width: 400px;
+  height: 300px;
+  border: 1px solid red;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+}
+.item {
+  background: green;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #fff;
+}
+.item:nth-child(2) {
+  padding: 20px 10px;
+}
