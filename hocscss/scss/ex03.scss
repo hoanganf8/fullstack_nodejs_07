@@ -1,0 +1,61 @@
+//Comment SCSS
+/* Comment CSS */
+:root {
+  --primary-color: red;
+}
+
+//Cú pháp lồng: selector, thuộc tính (Bỏ)
+// a:hover
+
+.header {
+  padding: 30px 0;
+  .top-bar {
+    display: flex;
+    background: gray;
+    a {
+      text-decoration: none;
+      &:hover {
+        color: red;
+      }
+      &::before {
+        content: "";
+      }
+    }
+    .top-left {
+      list-style: none;
+    }
+    .top-right {
+      background: yellow;
+    }
+  }
+  .header-inner {
+    box-shadow: 3px 3px 5px 5px #ccc;
+    .logo {
+      > img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    nav {
+      &.primary-menu {
+        background: green;
+        > ul {
+          list-style: none;
+          > li {
+            &:hover {
+              a {
+                color: red;
+              }
+            }
+            // > a {
+            //   color: #fff;
+            //   &:hover {
+            //     color: yellow;
+            //   }
+            // }
+          }
+        }
+      }
+    }
+  }
+}

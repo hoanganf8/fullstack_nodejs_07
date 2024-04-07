@@ -1,0 +1,76 @@
+//Câu lệnh rẽ nhánh
+//Toán tử so sánh: >, <, >=, <=, ==, !=
+//Toán tử lý luận: and, or, not
+// - and: Đúng khi tất cả biểu thức đều đúng
+// - or: Sai khi tất cả biểu thức đều sai
+// - not: Ngược lại
+
+// $a: 15;
+
+// @if ($a < 5) {
+//   .box {
+//     color: red;
+//   }
+// } @else if ($a >= 5 and $a < 10) {
+//   .box {
+//     color: green;
+//   }
+// } @else if ($a >= 10 and $a < 15) {
+//   .box {
+//     color: yellow;
+//   }
+// } @else {
+//   .box {
+//     color: blueviolet;
+//   }
+// }
+
+//Kế thừa
+//1. @extend
+//2. placeholder (@extend)
+//3. @mixin và @include
+
+//Ví dụ: Giả sử có 1 đoạn css và muốn thêm vào .products, .posts
+// transition: all 0.4s linear
+
+@import "partials/variables";
+@import "partials/placeholders";
+@import "partials/mixin";
+
+.box {
+  background: $primaryColor;
+  padding: 30px 0;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+// @mixin container {
+//   .container {
+//     @include center;
+//   }
+// }
+
+.posts {
+  background: gray;
+  @extend .box;
+  @extend %transition;
+}
+
+.products {
+  background: #fff;
+  @extend .box;
+  @extend %transition;
+}
+
+.testimonials {
+  background: gray;
+  @include center(1200px, 40px);
+}
+
+// @include container;
+
+//Tách file:
+// Cách 1: @import
+// Cách 2: @use
+// Cách 3: @forward
+// Lưu khi tạo file để import: Bắt đầu bằng gạch dưới (_)

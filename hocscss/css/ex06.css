@@ -1,0 +1,222 @@
+.text-normal {
+  font-weight: 400;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+@media screen and (min-width: 576px) {
+  .col-sm-1 {
+    color: red;
+  }
+  .col-sm-2 {
+    color: red;
+  }
+  .col-sm-3 {
+    color: red;
+  }
+  .col-sm-4 {
+    color: red;
+  }
+  .col-sm-5 {
+    color: red;
+  }
+  .col-sm-6 {
+    color: red;
+  }
+  .col-sm-7 {
+    color: red;
+  }
+  .col-sm-8 {
+    color: red;
+  }
+  .col-sm-9 {
+    color: red;
+  }
+  .col-sm-10 {
+    color: red;
+  }
+  .col-sm-11 {
+    color: red;
+  }
+  .col-sm-12 {
+    color: red;
+  }
+}
+@media screen and (min-width: 768px) {
+  .col-md-1 {
+    color: red;
+  }
+  .col-md-2 {
+    color: red;
+  }
+  .col-md-3 {
+    color: red;
+  }
+  .col-md-4 {
+    color: red;
+  }
+  .col-md-5 {
+    color: red;
+  }
+  .col-md-6 {
+    color: red;
+  }
+  .col-md-7 {
+    color: red;
+  }
+  .col-md-8 {
+    color: red;
+  }
+  .col-md-9 {
+    color: red;
+  }
+  .col-md-10 {
+    color: red;
+  }
+  .col-md-11 {
+    color: red;
+  }
+  .col-md-12 {
+    color: red;
+  }
+}
+@media screen and (min-width: 992px) {
+  .col-lg-1 {
+    color: red;
+  }
+  .col-lg-2 {
+    color: red;
+  }
+  .col-lg-3 {
+    color: red;
+  }
+  .col-lg-4 {
+    color: red;
+  }
+  .col-lg-5 {
+    color: red;
+  }
+  .col-lg-6 {
+    color: red;
+  }
+  .col-lg-7 {
+    color: red;
+  }
+  .col-lg-8 {
+    color: red;
+  }
+  .col-lg-9 {
+    color: red;
+  }
+  .col-lg-10 {
+    color: red;
+  }
+  .col-lg-11 {
+    color: red;
+  }
+  .col-lg-12 {
+    color: red;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .col-xl-1 {
+    color: red;
+  }
+  .col-xl-2 {
+    color: red;
+  }
+  .col-xl-3 {
+    color: red;
+  }
+  .col-xl-4 {
+    color: red;
+  }
+  .col-xl-5 {
+    color: red;
+  }
+  .col-xl-6 {
+    color: red;
+  }
+  .col-xl-7 {
+    color: red;
+  }
+  .col-xl-8 {
+    color: red;
+  }
+  .col-xl-9 {
+    color: red;
+  }
+  .col-xl-10 {
+    color: red;
+  }
+  .col-xl-11 {
+    color: red;
+  }
+  .col-xl-12 {
+    color: red;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .col-xxl-1 {
+    color: red;
+  }
+  .col-xxl-2 {
+    color: red;
+  }
+  .col-xxl-3 {
+    color: red;
+  }
+  .col-xxl-4 {
+    color: red;
+  }
+  .col-xxl-5 {
+    color: red;
+  }
+  .col-xxl-6 {
+    color: red;
+  }
+  .col-xxl-7 {
+    color: red;
+  }
+  .col-xxl-8 {
+    color: red;
+  }
+  .col-xxl-9 {
+    color: red;
+  }
+  .col-xxl-10 {
+    color: red;
+  }
+  .col-xxl-11 {
+    color: red;
+  }
+  .col-xxl-12 {
+    color: red;
+  }
+}
+.header {
+  display: flex;
+  padding: 30px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    display: block;
+  }
+  .header .menu {
+    background: green;
+  }
+}
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 0;
+  }
+}
+
+/*# sourceMappingURL=ex06.css.map */
