@@ -3,9 +3,24 @@
   margin: 0;
   box-sizing: border-box;
 }
-.progress-bar {
+.player {
   width: 80%;
   margin: 30px auto;
+}
+.player .play-btn {
+  text-align: center;
+}
+.player .play-btn i {
+  cursor: pointer;
+}
+.player .play-timer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.progress-bar {
+  width: 100%;
   height: 10px;
   background: gray;
   position: relative;

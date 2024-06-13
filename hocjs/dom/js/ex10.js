@@ -45,3 +45,46 @@ var handleDrag = function (e) {
   }
   progress.style.width = rate + "%";
 };
+
+var audio = document.querySelector("audio");
+var player = document.querySelector(".player");
+var playeBtn = player.querySelector(".play-btn i");
+var playTimer = player.querySelector(".play-timer");
+var currentTimeEl = playTimer.firstElementChild;
+var durationEl = playTimer.lastElementChild;
+var duration = 0;
+var setDuration = function () {
+  duration = audio.duration;
+};
+var getTimeFormat = function (seconds) {
+  var mins = Math.floor(seconds / 60);
+  seconds = Math.floor(seconds - mins * 60);
+  return `${mins < 10 ? "0" + mins : mins}:${
+    seconds < 10 ? "0" + seconds : seconds
+  }`;
+};
+window.addEventListener("load", function () {
+  setDuration();
+  durationEl.innerText = getTimeFormat(duration);
+  playeBtn.addEventListener("click", function () {
+    if (audio.paused) {
+      //Nhạc đang dừng
+      audio.play(); //Phát nhạc
+    } else {
+      //Nhạc đang phát
+      audio.pause(); //Dừng nhạc
+    }
+  });
+  audio.addEventListener("play", function () {
+    playeBtn.classList.replace("fa-play", "fa-pause");
+  });
+  audio.addEventListener("pause", function () {
+    playeBtn.classList.replace("fa-pause", "fa-play");
+  });
+  audio.addEventListener("timeupdate", function () {
+    var currentTime = audio.currentTime;
+    currentTimeEl.innerText = getTimeFormat(currentTime);
+    var rate = (currentTime / duration) * 100;
+    progress.style.width = `${rate}%`;
+  });
+});
