@@ -4,9 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        transition: opacity 1s ease;
+      }
+    </style>
     <script src="js/ex13.js"></script>
   </head>
   <body>
+    <div class="preloader">Loading...</div>
     <h1>Học JS không khó</h1>
     <img src="https://picsum.photos/5000" alt="" />
   </body>

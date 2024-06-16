@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 2000px;
+      }
+      .top-btn {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1000;
+        padding: 5px;
+        display: none;
+        &.show {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">Click me</button>
+    <button class="top-btn">Top</button>
+    <script src="js/ex15.js"></script>
+  </body>
+</html>
