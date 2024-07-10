@@ -12,6 +12,36 @@
   <body>
     <div class="container py-3">
       <h2>Danh sách người dùng</h2>
+      <form action="" class="filter-form mb-3">
+        <div class="row">
+          <div class="col-3">
+            <select class="form-select" name="status">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="active">Kích hoạt</option>
+              <option value="inactive">Chưa kích hoạt</option>
+            </select>
+          </div>
+          <div class="col-7">
+            <input
+              type="search"
+              class="form-control"
+              name="keyword"
+              placeholder="Từ khóa tìm kiếm..."
+            />
+          </div>
+          <div class="col-2 d-grid">
+            <button type="submit" class="btn btn-primary">Tìm</button>
+          </div>
+        </div>
+      </form>
+      <div class="btn-group btn-group-sm mb-3">
+        <button class="sort-item btn btn-primary active" data-value="latest">
+          Mới nhất
+        </button>
+        <button class="sort-item btn btn-primary" data-value="oldest">
+          Cũ nhất
+        </button>
+      </div>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -57,6 +87,7 @@
         <button class="btn btn-primary">Lưu thay đổi</button>
       </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="js/ex02.js"></script>
   </body>
 </html>

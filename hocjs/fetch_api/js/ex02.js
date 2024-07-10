@@ -1,6 +1,10 @@
 const serverApi = `http://localhost:3000`;
-const getUsers = async () => {
-  const response = await fetch(serverApi + "/users");
+const getUsers = async (params = {}) => {
+  let query = new URLSearchParams(params).toString();
+  if (query) {
+    query = "?" + query;
+  }
+  const response = await fetch(serverApi + "/users" + query);
   const users = await response.json();
   renderTable(users);
 };
@@ -55,6 +59,33 @@ const updateUser = async (id, data) => {
     alert(e.message);
   }
 };
+const deleteUser = (id) => {
+  Swal.fire({
+    title: "Bạn chắc chưa?",
+    text: "Nếu xóa thì không lấy lại được đâu!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ok, Xóa đi!",
+    cancelButtonText: "Huỷ",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      //Call API
+      const response = await fetch(`${serverApi}/users/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        getUsers();
+        Swal.fire({
+          title: "Xóa rồi!",
+          text: "Người dùng đã bị xóa.",
+          icon: "success",
+        });
+      }
+    }
+  });
+};
 const renderTable = (users) => {
   const tbody = document.querySelector(".table tbody");
   tbody.innerHTML = `${users
@@ -101,6 +132,9 @@ const addEventActionBtn = () => {
       //Gọi hàm để xử lý cập nhật
       getUser(target.dataset.id);
     }
+    if (target.dataset.action === "delete") {
+      deleteUser(target.dataset.id);
+    }
   });
 };
 
@@ -130,6 +164,43 @@ const closeFormUpdate = () => {
   form.previousElementSibling.innerText = `Thêm người dùng`;
 };
 
-getUsers();
+const addEventFilterForm = () => {
+  const form = document.querySelector(".filter-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const { status, keyword } = Object.fromEntries([...new FormData(form)]);
+    const params = {};
+    if (status === "active" || status === "inactive") {
+      params.status = status;
+    }
+    if (keyword) {
+      params.q = keyword;
+    }
+    getUsers(params);
+  });
+};
+
+const addEventSort = () => {
+  const sortItems = document.querySelectorAll(".sort-item");
+  sortItems.forEach((sortItem) => {
+    sortItem.addEventListener("click", (e) => {
+      const itemActive = document.querySelector(".sort-item.active");
+      if (itemActive) {
+        itemActive.classList.remove("active");
+      }
+      e.target.classList.add("active");
+      const value = e.target.dataset.value;
+      const params = {
+        _sort: "id",
+        _order: value === "latest" ? "desc" : "asc",
+      };
+      getUsers(params);
+    });
+  });
+};
+
+getUsers({ _sort: "id", _order: "desc" });
 addEventFormSubmit();
 addEventActionBtn();
+addEventFilterForm();
+addEventSort();
