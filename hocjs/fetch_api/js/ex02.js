@@ -6,7 +6,13 @@ const getUsers = async (params = {}) => {
   }
   const response = await fetch(serverApi + "/users" + query);
   const users = await response.json();
+
+  //Tính tổng số trang = Tổng số bản ghi / Số bản ghi của 1 trang (limit)
+  const totalRecords = response.headers.get("x-total-count");
+  data.totalPages = Math.ceil(totalRecords / params._limit);
+  data.recordNumber = users.length;
   renderTable(users);
+  renderPagination(data.totalPages);
 };
 const getUser = async (id) => {
   try {
@@ -53,7 +59,7 @@ const updateUser = async (id, data) => {
     if (!response.ok) {
       throw new Error("Update Failed");
     }
-    getUsers(); //Cập nhật lại table
+    getUsers(params); //Cập nhật lại table
     closeFormUpdate(); //Đóng form update
   } catch (e) {
     alert(e.message);
@@ -76,7 +82,11 @@ const deleteUser = (id) => {
         method: "DELETE",
       });
       if (response.ok) {
-        getUsers();
+        if (data.totalPages === params._page && data.recordNumber === 1) {
+          //Trang cuối
+          params._page--;
+        }
+        getUsers(params);
         Swal.fire({
           title: "Xóa rồi!",
           text: "Người dùng đã bị xóa.",
@@ -105,6 +115,37 @@ const renderTable = (users) => {
     )
     .join("")}`;
 };
+const renderPagination = (totalPages) => {
+  const paginationView = document.querySelector(".pagination-view");
+  paginationView.innerHTML = `<ul class="pagination pagination-sm">
+      ${
+        params._page > 1
+          ? `<li class="page-item">
+        <a class="page-link page-prev" href="#" aria-label="Previous">
+          &laquo;
+        </a>
+      </li>`
+          : ""
+      }
+      ${Array.from(Array(totalPages).keys())
+        .map(
+          (_, index) =>
+            `<li class="page-item"><a class="page-link page-number ${
+              index === params._page - 1 ? "active" : ""
+            }" href="#">${index + 1}</a></li>`
+        )
+        .join("")}
+      ${
+        params._page < totalPages
+          ? `<li class="page-item">
+        <a class="page-link page-next" href="#" aria-label="Next">
+          &raquo;
+        </a>
+      </li>`
+          : ""
+      }
+    </ul>`;
+};
 const addEventFormSubmit = () => {
   const form = document.querySelector(".form-update");
   form.addEventListener("submit", async (e) => {
@@ -113,7 +154,9 @@ const addEventFormSubmit = () => {
     if (!form.dataset.id) {
       const status = await addUser(formData);
       if (status) {
-        getUsers();
+        params._page = 1;
+        params._order = "desc";
+        getUsers(params);
         form.reset();
       } else {
         alert("Thêm thất bại");
@@ -169,12 +212,15 @@ const addEventFilterForm = () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const { status, keyword } = Object.fromEntries([...new FormData(form)]);
-    const params = {};
     if (status === "active" || status === "inactive") {
       params.status = status;
+    } else {
+      delete params.status;
     }
     if (keyword) {
       params.q = keyword;
+    } else {
+      delete params.q;
     }
     getUsers(params);
   });
@@ -190,17 +236,40 @@ const addEventSort = () => {
       }
       e.target.classList.add("active");
       const value = e.target.dataset.value;
-      const params = {
-        _sort: "id",
-        _order: value === "latest" ? "desc" : "asc",
-      };
+      params._order = value === "latest" ? "desc" : "asc";
       getUsers(params);
     });
   });
 };
 
-getUsers({ _sort: "id", _order: "desc" });
+const addEventChangePagination = () => {
+  const paginationView = document.querySelector(".pagination-view");
+  paginationView.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("page-number")) {
+      const pageNumber = +e.target.innerText;
+      params._page = pageNumber;
+      getUsers(params);
+    }
+    if (e.target.classList.contains("page-prev")) {
+      params._page--;
+      getUsers(params);
+    }
+    if (e.target.classList.contains("page-next")) {
+      params._page++;
+      getUsers(params);
+    }
+  });
+};
+
+const params = { _sort: "id", _order: "desc", _limit: 2, _page: 1 };
+const data = {
+  totalPages: 1,
+  recordNumber: 0,
+};
+getUsers(params);
 addEventFormSubmit();
 addEventActionBtn();
 addEventFilterForm();
 addEventSort();
+addEventChangePagination();
