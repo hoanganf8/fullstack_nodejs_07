@@ -97,15 +97,48 @@ const removeLoadingBtn = (loginForm) => {
   btn.disabled = false;
 };
 
+const sendRefreshToken = async () => {
+  try {
+    const { refresh_token: refreshToken } = JSON.parse(
+      localStorage.getItem("login_token")
+    );
+    const response = await fetch(`${serverApi}/auth/refresh-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken }),
+    });
+    if (!response.ok) {
+      throw new Error("Unauthorize");
+    }
+    return response.json();
+  } catch (e) {
+    return false;
+  }
+};
+
 const showProfile = async () => {
   const user = await getProfile();
   if (user) {
     const profileNameEl = document.querySelector(".profile-name");
     profileNameEl.innerText = user.name;
   } else {
-    localStorage.removeItem("login_token");
-    render();
+    //Call Refresh Token
+    const newToken = await sendRefreshToken();
+    if (newToken) {
+      localStorage.setItem("login_token", JSON.stringify(newToken));
+      showProfile();
+    } else {
+      localStorage.removeItem("login_token");
+      render();
+    }
   }
+};
+
+const handleLogout = () => {
+  localStorage.removeItem("login_token");
+  render();
 };
 
 const render = () => {
@@ -115,7 +148,7 @@ const render = () => {
       <h2>Chào mừng bạn đến với F8</h2>
       <ul class="list-unstyled d-flex gap-2">
         <li>Chào bạn: <span class="profile-name">Loading...</span></li>
-        <li><a href="#">Đăng xuất</a></li>
+        <li><a href="#" onclick="handleLogout()">Đăng xuất</a></li>
       </ul>
     </div>`;
     showProfile();

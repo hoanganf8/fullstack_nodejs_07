@@ -10,3 +10,7 @@
 
 - Token-based Authentication
   Lưu trữ thông tin user vào token (JWT = Json Web Token)
+
+## Đăng xuất
+
+Yêu cầu đăng xuất ==> Call API tới Server ==> Lưu accessToken vào Blacklist của Server ==> Xóa localStorage
