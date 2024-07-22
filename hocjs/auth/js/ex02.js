@@ -1,3 +1,4 @@
+import { httpClient } from "./client.js";
 //Submit form ==> Lấy dữ liệu ==> Validate
 const serverApi = `https://api.escuelajs.co/api/v1`;
 
@@ -27,7 +28,6 @@ document.body.addEventListener("submit", async (e) => {
       });
     } else {
       //Call API
-      //https://api.escuelajs.co/api/v1/auth/login
       setLoadingBtn(loginForm);
       const loginData = await sendLogin({
         email,
@@ -45,21 +45,26 @@ document.body.addEventListener("submit", async (e) => {
 });
 
 const sendLogin = async (loginData) => {
-  try {
-    const response = await fetch(`${serverApi}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    });
-    if (!response.ok) {
-      throw new Error("Unauthorize");
-    }
-    return response.json();
-  } catch {
+  // try {
+  //   const response = await fetch(`${serverApi}/auth/login`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(loginData),
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error("Unauthorize");
+  //   }
+  //   return response.json();
+  // } catch {
+  //   return false;
+  // }
+  const { response, data } = await httpClient.post(`/auth/login`, loginData);
+  if (!response.ok) {
     return false;
   }
+  return data;
 };
 
 const getProfile = async () => {
@@ -67,15 +72,21 @@ const getProfile = async () => {
     const { access_token: accessToken } = JSON.parse(
       localStorage.getItem("login_token")
     );
-    const response = await fetch(`${serverApi}/auth/profile`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    // const response = await fetch(`${serverApi}/auth/profile`, {
+    //   headers: {
+    //     Authorization: `Bearer ${accessToken}`,
+    //   },
+    // });
+    // if (!response.ok) {
+    //   throw new Error("Unauthorize");
+    // }
+    // return response.json();
+    httpClient.token = accessToken;
+    const { response, data } = await httpClient.get("/auth/profile");
     if (!response.ok) {
       throw new Error("Unauthorize");
     }
-    return response.json();
+    return data;
   } catch {
     return false;
   }
