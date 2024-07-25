@@ -72,15 +72,6 @@ const getProfile = async () => {
     const { access_token: accessToken } = JSON.parse(
       localStorage.getItem("login_token")
     );
-    // const response = await fetch(`${serverApi}/auth/profile`, {
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`,
-    //   },
-    // });
-    // if (!response.ok) {
-    //   throw new Error("Unauthorize");
-    // }
-    // return response.json();
     httpClient.token = accessToken;
     const { response, data } = await httpClient.get("/auth/profile");
     if (!response.ok) {
@@ -135,15 +126,8 @@ const showProfile = async () => {
     const profileNameEl = document.querySelector(".profile-name");
     profileNameEl.innerText = user.name;
   } else {
-    //Call Refresh Token
-    const newToken = await sendRefreshToken();
-    if (newToken) {
-      localStorage.setItem("login_token", JSON.stringify(newToken));
-      showProfile();
-    } else {
-      localStorage.removeItem("login_token");
-      render();
-    }
+    localStorage.removeItem("login_token");
+    render();
   }
 };
 
