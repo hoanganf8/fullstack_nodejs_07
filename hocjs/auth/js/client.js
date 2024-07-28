@@ -1,4 +1,4 @@
-import { config } from "./config.js";
+import config from "./config.js";
 export const httpClient = {
   serverApi: config.SERVER_API ?? null,
   token: null,
