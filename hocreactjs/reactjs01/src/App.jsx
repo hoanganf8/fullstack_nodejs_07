@@ -1,55 +1,29 @@
-// import { Fragment } from "react";
-// import Footer from "./components/Footer";
-// import Header from "./components/Header";
-
-// import Avatar from "./components/Avatar";
-import User from "./components/User";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function App() {
-  // const handleClick = (e) => {
-  //   console.log(e);
-  // };
-  // const handleClick2 = (title) => {
-  //   console.log(title);
-  // };
-  // const jsx = (
-  //   <>
-  //     <h2>Hello</h2>
-  //     <h2>Hello</h2>
-  //   </>
-  // );
-  // const handleClick = () => {
-  //   console.log(`Click me`);
-  // };
-  const users = [
-    {
-      name: "User 1",
-      email: "user1@gmail.com",
-    },
-    {
-      name: "User 2",
-      email: "user2@gmail.com",
-    },
-    {
-      name: "User 3",
-      email: "user3@gmail.com",
-    },
-  ];
+  const [title, setTitle] = useState("F8");
+  const [count, setCount] = useState(0);
+  const handleChangeValue = (e) => {
+    setTitle(e.target.value);
+  };
+  useEffect(() => {
+    document.title = title;
+    console.log("Side Effect");
+  }, [title]);
+  console.log("Component Re-render");
   return (
-    <>
-      {/* <Header />
-      <main>
-        <h1>Trang chủ</h1>
-        {jsx}
-        <button onClick={handleClick}>Click me</button>
-        <button onClick={(e) => handleClick2(e.target.innerText)}>
-          Click me 2
-        </button>
-      </main>
-      <Footer /> */}
-      {users.map((user, index) => (
-        <User key={index} {...user} />
-      ))}
-    </>
+    <div>
+      <input type="text" onChange={handleChangeValue} />
+      {console.log("UI Update")}
+      <button onClick={() => setCount(count + 1)}>Click me ({count})</button>
+    </div>
   );
 }
+
+/*
+Hook useEffect(callback, dependencies?)
+- null hoặc undefined ==> Component re-render callback trong useEffect sẽ được gọi
+- [] ==> callback trong useEffect chỉ gọi khi component được render lần đầu tiên
+- [bien1, bien2,...] ==> callback trong useEffect chỉ gọi khi 1 trong các biến thay đổi
+*/
