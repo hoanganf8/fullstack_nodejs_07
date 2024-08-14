@@ -3,7 +3,7 @@ import App from "./App";
 import React from "react";
 const root = document.querySelector("#root");
 ReactDOM.createRoot(root).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );
