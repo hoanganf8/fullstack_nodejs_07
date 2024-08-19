@@ -1,25 +1,22 @@
+import { useLayoutEffect } from "react";
 import { useState } from "react";
-import UsdVnd from "./components/ConvertMoney/UsdVnd";
-import VndUsd from "./components/ConvertMoney/VndUsd";
 
 export default function App() {
-  const [usd, setUsd] = useState("");
-  const [vnd, setVnd] = useState("");
-  const handleChangeUsd = (e) => {
-    const usdValue = e.target.value;
-    //Chuyển thành vnd
-    setVnd(usdValue * 25000);
-    setUsd(usdValue);
-  };
-  const handleChangeVnd = (e) => {
-    const vndValue = e.target.value;
-    setVnd(vndValue);
-    setUsd(vndValue / 25000);
-  };
-  return (
-    <div>
-      <UsdVnd usd={usd} onChange={handleChangeUsd} />
-      <VndUsd vnd={vnd} onChange={handleChangeVnd} />
-    </div>
-  );
+  const [isAuthenticated, setAuthenticated] = useState(false);
+  useLayoutEffect(() => {
+    const status = localStorage.getItem("user_token");
+    if (status) {
+      setAuthenticated(true);
+    }
+  }, []);
+  return <div>{isAuthenticated ? <h1>Profile</h1> : <h1>Login</h1>}</div>;
 }
+
+//useLayoutEffect
+/*
+1. state thay đổi
+2. component re-render
+3. cleanup useLayoutEffect
+4. callback useLayoutEffect
+5. update UI (Khi callback chạy xong)
+*/
