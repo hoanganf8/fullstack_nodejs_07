@@ -1,28 +1,50 @@
-import { createContext, useState } from "react";
-import Content from "./components/Content";
-export const AppContext = createContext();
-
+import { useReducer } from "react";
+const reducer = (prevState, action) => {
+  switch (action.type) {
+    case "counter/increment":
+      return { ...prevState, count: prevState.count + 1 };
+    case "todos/add":
+      return {
+        ...prevState,
+        todoList: [...prevState.todoList, action.payload],
+      };
+    default:
+      return prevState;
+  }
+};
 export default function App() {
-  const [msg, setMsg] = useState("Học React không khó");
+  /*
+  State sẽ có dạng như sau: 
+  {
+    count: 0,
+    todoList: [],
+    user: {}
+  }
+
+  Action sẽ có dạng như sau: 
+  {
+    type: "ten_hanh_dong",
+    payload: "du lieu can gui len"
+  }
+  */
+  const initialState = {
+    count: 0,
+    todoList: [],
+    user: {},
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
+
   const handleClick = () => {
-    setMsg("Học React quá khó");
+    dispatch({
+      type: "counter/increment",
+      payload: 5,
+    });
   };
   return (
-    <AppContext.Provider
-      value={{
-        msg,
-        onClick: handleClick,
-      }}
-    >
-      <Content />
-    </AppContext.Provider>
+    <div>
+      <h1>Count: {state.count}</h1>
+      <button onClick={handleClick}>Click me</button>
+    </div>
   );
 }
-
-//A => B => C => D
-//Context
-/*
-- Khởi tạo đối tượng Context==> Dùng hàm createContext
-- Bọc Component Provider (Của Context) ==> Để gửi dữ liệu vào context
-- Lấy dữ liệu từ Context: Dùng component Consumer hoặc hook useContext
-*/
