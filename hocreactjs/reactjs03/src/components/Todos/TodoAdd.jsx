@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
-import { ProviderContext } from "../../store/Provider";
+import { useState } from "react";
+
 import { v4 as uuid } from "uuid";
+import { useDispatch } from "../../store/hook";
+import { addTodo } from "../../store/actions/todoActions";
 
 export default function TodoAdd() {
   const [name, setName] = useState("");
-  const { dispatch } = useContext(ProviderContext);
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
@@ -16,10 +18,7 @@ export default function TodoAdd() {
       name,
       isCompleted: false,
     };
-    dispatch({
-      type: "todos/add",
-      payload: todo,
-    });
+    dispatch(addTodo(todo));
     setName("");
   };
   return (

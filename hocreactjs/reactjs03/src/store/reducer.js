@@ -1,6 +1,11 @@
 export const initialState = {
   count: 0,
   todoList: [],
+  postList: [],
+  auth: {
+    user: {},
+    isLoading: true,
+  },
 };
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -25,6 +30,14 @@ export const reducer = (state, action) => {
           return todo;
         }),
       };
+    case "posts/update":
+      return { ...state, postList: action.payload };
+    case "auth/setUser": {
+      return { ...state, auth: { ...state.auth, user: action.payload } };
+    }
+    case "auth/setLoading": {
+      return { ...state, auth: { ...state.auth, isLoading: false } };
+    }
     default:
       return state;
   }

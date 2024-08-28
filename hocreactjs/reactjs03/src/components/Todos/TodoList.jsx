@@ -1,26 +1,21 @@
-import { useContext } from "react";
-import { ProviderContext } from "../../store/Provider";
+import { completedTodo, removeTodo } from "../../store/actions/todoActions";
+import { useDispatch, useSelector } from "../../store/hook";
 
 export default function TodoList() {
-  const { state, dispatch } = useContext(ProviderContext);
+  const dispatch = useDispatch();
+  const todoList = useSelector((state) => state.todoList);
   const handleRemove = (id) => {
     if (window.confirm("Bạn có chắc?")) {
-      dispatch({
-        type: "todos/remove",
-        payload: id,
-      });
+      dispatch(removeTodo(id));
     }
   };
   const handleCompleted = (id, status) => {
-    dispatch({
-      type: "todos/completed",
-      payload: { id, status },
-    });
+    dispatch(completedTodo(id, status));
   };
   return (
     <div>
       <ul>
-        {state.todoList.map(({ id, name, isCompleted }) => (
+        {todoList.map(({ id, name, isCompleted }) => (
           <li key={id}>
             <input
               type="checkbox"
